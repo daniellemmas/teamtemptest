@@ -8,6 +8,10 @@ view: staff {
     sql: ${TABLE}.squad ;;
   }
 
+  dimension: to_date {
+    type: date
+    sql:  ${TABLE}.to_date ;;
+  }
   dimension: status {
     type: string
 
@@ -18,8 +22,5 @@ view: staff {
     type: count
     drill_fields: []
   }
-  measure: count_current {
-    type: count
 
-}
 }
