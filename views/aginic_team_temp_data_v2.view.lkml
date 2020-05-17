@@ -23,6 +23,7 @@ view: aginic_team_temp_data_v2 {
 
   dimension: session_token {
     type: string
+    primary_key: yes
     sql: ${TABLE}.SessionToken ;;
   }
 
