@@ -11,6 +11,7 @@ explore: aginic_team_temp_data_v2 {
 #
 join: staff {
 relationship: one_to_many
+type: full_outer
 sql_on: ${staff.squad} = ${aginic_team_temp_data_v2.squad} ;;
  }
 }
