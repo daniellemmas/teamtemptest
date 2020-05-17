@@ -19,8 +19,8 @@ view: staff {
   }
 
   measure: count {
-    type: count
-    drill_fields: []
+    type: count_distinct
+    sql: ${TABLE}.email ;;
   }
 
 }
