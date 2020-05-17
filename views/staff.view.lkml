@@ -2,8 +2,6 @@ view: staff {
   sql_table_name: `aginic-data-warehouse.analytics.staff`
     ;;
 
-
-
   dimension: squad {
     type: string
     primary_key: yes
@@ -12,6 +10,7 @@ view: staff {
 
   dimension: status {
     type: string
+
     sql: ${TABLE}.status ;;
   }
 
@@ -21,6 +20,6 @@ view: staff {
   }
   measure: count_current {
     type: count
-    filters: [status: "Current"]
+
 }
 }

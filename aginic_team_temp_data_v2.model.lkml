@@ -10,14 +10,14 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 explore: aginic_team_temp_data_v2 {
 #
 join: staff {
-relationship: many_to_many
+relationship: many_to_one
 sql_on: ${staff.squad} = ${aginic_team_temp_data_v2.squad} ;;
  }
 }
 
 explore: staff {
 join: aginic_team_temp_data_v2 {
-  relationship: many_to_many
+  relationship: one_to_many
   sql_on: ${aginic_team_temp_data_v2.squad}=${staff.squad};;
 }
 }
