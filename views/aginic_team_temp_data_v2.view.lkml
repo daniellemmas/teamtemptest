@@ -40,7 +40,6 @@ view: aginic_team_temp_data_v2 {
     type: count
     drill_fields: []
   }
-
   measure: average {
     type: average
     sql:  ${week_score} ;;
