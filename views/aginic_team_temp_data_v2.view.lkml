@@ -6,7 +6,6 @@ view: aginic_team_temp_data_v2 {
     type: time
     timeframes: [
       raw,
-      time,
       date,
       week,
       month,
