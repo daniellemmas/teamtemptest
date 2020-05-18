@@ -18,7 +18,7 @@ view: staff {
     sql: ${TABLE}.status ;;
   }
 
-  measure: count {
+  measure: count_team {
     type: count_distinct
     sql: ${TABLE}.email ;;
   }

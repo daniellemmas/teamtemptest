@@ -37,7 +37,7 @@ view: aginic_team_temp_data_v2 {
     sql: ${TABLE}.WeekScore ;;
   }
 
-  measure: count {
+  measure: count_respondents {
     type: count
     drill_fields: []
   }
