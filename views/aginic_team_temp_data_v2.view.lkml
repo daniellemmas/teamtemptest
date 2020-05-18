@@ -58,4 +58,16 @@ view: aginic_team_temp_data_v2 {
     type:  count
     filters: [week_score: "4", week_score: "5"]
   }
+  measure: percentage_not_good {
+    type: number
+    sql:  sum(${count_not_good})/sum(${count_respondents}) ;;
+  }
+  measure: percentage_ok {
+    type: number
+    sql:  sum(${count_ok})/sum(${count_respondents}) ;;
+  }
+  measure: percentage_good {
+    type: number
+    sql:  sum(${count_good})/sum(${count_respondents}) ;;
+  }
 }
