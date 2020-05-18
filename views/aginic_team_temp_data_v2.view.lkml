@@ -46,4 +46,16 @@ view: aginic_team_temp_data_v2 {
     sql:  ${week_score} ;;
     drill_fields: []
   }
+  measure: count_not_good {
+    type:  count
+    filters: [week_score: "1", week_score: "2"]
+  }
+  measure: count_ok {
+    type:  count
+    filters: [week_score: "3"]
+  }
+  measure: count_good {
+    type:  count
+    filters: [week_score: "4", week_score: "5"]
+  }
 }
