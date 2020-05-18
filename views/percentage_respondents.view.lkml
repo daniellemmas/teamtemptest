@@ -27,7 +27,7 @@ view: percentage_respondents {
 
   }
   measure: percentage_respondents {
-    type: max
+    type: number
     sql: sum(${count_respondents})/sum(${count_team}) ;;
   }
 }
