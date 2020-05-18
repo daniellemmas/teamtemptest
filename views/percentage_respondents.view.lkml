@@ -1,5 +1,5 @@
 # If necessary, uncomment the line below to include explore_source.
-# include: "aginic_team_temp_data_v2.model.lkml"
+#include: "aginic_team_temp_data_v2.model.lkml"
 
 view: percentage_respondents {
   derived_table: {

@@ -15,3 +15,6 @@ type: full_outer
 sql_on: ${staff.squad} = ${aginic_team_temp_data_v2.squad} ;;
  }
 }
+explore: percentage_respondents {
+
+}
