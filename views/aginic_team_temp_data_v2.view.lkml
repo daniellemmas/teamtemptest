@@ -48,7 +48,7 @@ view: aginic_team_temp_data_v2 {
   }
   measure: count_not_good {
     type:  count
-    filters: [week_score: "1", week_score: "2"]
+    filters: [week_score: "<= 2"]
   }
   measure: count_ok {
     type:  count
@@ -56,7 +56,7 @@ view: aginic_team_temp_data_v2 {
   }
   measure: count_good {
     type:  count
-    filters: [week_score: "4", week_score: "5"]
+    filters: [week_score: ">= 4"]
   }
   measure: percentage_not_good {
     type: number
