@@ -15,6 +15,10 @@ view: percentage_respondents {
         field: staff.to_date
         value: "NULL"
       }
+      filters: {
+        field: staff.to_date
+        value: "NULL"
+      }
     }
   }
   dimension: count_team {
@@ -28,6 +32,6 @@ view: percentage_respondents {
   }
   measure: percentage_respondents {
     type: number
-    sql: sum(${count_respondents})/sum(${count_team}) ;;
+    sql: sum(${count_respondents})/(sum(${count_team})*2) ;;
   }
 }
