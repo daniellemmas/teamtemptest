@@ -35,6 +35,18 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: ${TABLE}.WeekScore ;;
   }
+  dimension: work_laod {
+    type: string
+    sql: ${TABLE}.WorkLoad ;;
+  }
+  dimension: proud_of_work {
+    type: string
+    sql: ${TABLE}.ProudOfWork ;;
+  }
+  dimension: squad_connection {
+    type: string
+    sql: ${TABLE}.SquadConnection ;;
+  }
 
   measure: count_respondents {
     type: count
