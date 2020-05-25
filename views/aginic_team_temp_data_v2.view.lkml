@@ -108,15 +108,15 @@ view: aginic_team_temp_data_v2 {
     filters: [proud_of_work: "<=2"]
   }
 
-  measure: count_work_load_good {
+  measure: count_work_load_too_much{
     type:  count
     filters: [work_load: ">=4"]
   }
-  measure: count_work_load_ok {
+  measure: count_work_load_perfect {
     type:  count
     filters: [work_load: "3"]
   }
-  measure: count_work_load_not_good {
+  measure: count_work_load_not_enough{
     type:  count
     filters: [work_load: "<=2"]
   }
