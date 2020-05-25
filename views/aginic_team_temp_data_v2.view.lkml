@@ -10,7 +10,8 @@ view: aginic_team_temp_data_v2 {
       week,
       month,
       quarter,
-      year
+      year,
+      time
     ]
     sql: ${TABLE}.DateSubmitted ;;
   }

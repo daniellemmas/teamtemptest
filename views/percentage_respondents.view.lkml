@@ -41,7 +41,8 @@ view: percentage_respondents {
       week,
       month,
       quarter,
-      year
+      year,
+      time
     ]
 }
   measure: percentage_respondents {
