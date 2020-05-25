@@ -37,15 +37,15 @@ view: aginic_team_temp_data_v2 {
     sql: ${TABLE}.WeekScore ;;
   }
   dimension: work_load {
-    type: string
+    type: number
     sql: ${TABLE}.WorkLoad ;;
   }
   dimension: proud_of_work {
-    type: string
+    type: number
     sql: ${TABLE}.ProudOfWork ;;
   }
   dimension: squad_connection {
-    type: string
+    type: number
     sql: ${TABLE}.SquadConnection ;;
   }
 
