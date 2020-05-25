@@ -25,17 +25,20 @@ view: percentage_respondents {
   dimension: count_team {
     type: number
   }
-  dimension: squad {
 
+  dimension: squad {
   }
+
   dimension: count_respondents {
     type: number
   }
+
   dimension: date_submitted_date {
     type: date
   }
+
   measure: percentage_respondents {
     type: number
-    sql: sum(${count_respondents})/(sum(${count_team})) ;;
+    sql: sum(${count_respondents}/${count_team}) ;;
   }
 }
