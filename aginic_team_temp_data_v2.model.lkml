@@ -18,6 +18,6 @@ explore: aginic_team_temp_data_v2 {
 join: percentage_respondents {
 relationship: many_to_many
 type: full_outer
-sql_on: ${percentage_respondents.squad} = ${aginic_team_temp_data_v2.squad} and ${aginic_team_temp_data_v2.date_submitted_week} = ${percentage_respondents.date_submitted_date_week};;
+sql_on: ${percentage_respondents.squad} = ${aginic_team_temp_data_v2.squad} and ${aginic_team_temp_data_v2.date_submitted_date} = ${percentage_respondents.date_submitted_date_date};;
  }
 }
