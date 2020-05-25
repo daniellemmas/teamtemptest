@@ -36,7 +36,7 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: ${TABLE}.WeekScore ;;
   }
-  dimension: work_laod {
+  dimension: work_load {
     type: string
     sql: ${TABLE}.WorkLoad ;;
   }
@@ -81,5 +81,43 @@ view: aginic_team_temp_data_v2 {
   measure: percentage_good {
     type: number
     sql:  (${count_good})/(${count_respondents}) ;;
+  }
+  measure: count_connection_good {
+    type:  count
+    filters: [squad_connection: ">=4"]
+  }
+  measure: count_connection_ok {
+    type:  count
+    filters: [squad_connection: "3"]
+  }
+  measure: count_connection_not_good {
+    type:  count
+    filters: [squad_connection: "<=2"]
+  }
+
+  measure: count_pride_good {
+    type:  count
+    filters: [proud_of_work: ">=4"]
+  }
+  measure: count_pride_ok {
+    type:  count
+    filters: [proud_of_work: "3"]
+  }
+  measure: count_pride_not_good {
+    type:  count
+    filters: [proud_of_work: "<=2"]
+  }
+
+  measure: count_work_load_good {
+    type:  count
+    filters: [work_load: ">=4"]
+  }
+  measure: count_work_load_ok {
+    type:  count
+    filters: [work_load: "3"]
+  }
+  measure: count_work_load_not_good {
+    type:  count
+    filters: [work_load: "<=2"]
   }
 }
