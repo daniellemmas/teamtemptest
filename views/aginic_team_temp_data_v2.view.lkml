@@ -48,6 +48,10 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: ${TABLE}.SquadConnection ;;
   }
+  dimension: count_of_team {
+    type: number
+    sql:  ${TABLE}.CountOfTeam ;;
+  }
 
   measure: count_respondents {
     type: count
