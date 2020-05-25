@@ -33,10 +33,17 @@ view: percentage_respondents {
     type: number
   }
 
-  dimension: date_submitted_date {
-    type: date
-  }
-
+  dimension_group: date_submitted_date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+}
   measure: percentage_respondents {
     type: number
     sql: sum(${count_respondents}/${count_team}) ;;
