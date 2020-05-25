@@ -46,6 +46,6 @@ view: percentage_respondents {
 }
   measure: percentage_respondents {
     type: number
-    sql: sum(${count_respondents}/${count_team}) ;;
+    sql: (${count_respondents}/${count_team}) ;;
   }
 }
