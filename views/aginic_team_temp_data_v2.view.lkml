@@ -48,7 +48,7 @@ view: aginic_team_temp_data_v2 {
   }
   dimension: proud_of_work {
     type: number
-    sql: CAST(${TABLE}.ProudOfWork as NUMBER) ;;
+    sql: CAST(${TABLE}.ProudOfWork as INT64) ;;
   }
   dimension: squad_connection {
     type: number
