@@ -60,7 +60,7 @@ view: aginic_team_temp_data_v2 {
   }
 
   measure: sum_of_team {
-    type:  sum
+    type:  sum_distinct
     sql: ${count_of_team} ;;
   }
 
