@@ -139,4 +139,9 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql:  (${count_respondents})/(${sum_of_team}/${count_respondents}) ;;
   }
+
+  measure: total_percent_respondents {
+    type: number
+    sql:  (${count_respondents})/59 ;;
+  }
 }
