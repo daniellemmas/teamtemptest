@@ -46,9 +46,9 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: ${TABLE}.WorkLoad ;;
   }
-  dimension: proud_of_work {
+  dimension: innovation_constant_improvement {
     type: number
-    sql: CAST(${TABLE}.ProudOfWork as INT64) ;;
+    sql: (${TABLE}.Innovation) ;;
   }
   dimension: squad_connection {
     type: number
@@ -110,17 +110,17 @@ view: aginic_team_temp_data_v2 {
     filters: [squad_connection: "<=2"]
   }
 
-  measure: count_pride_good {
+  measure: count_innovation_good {
     type:  count
-    filters: [proud_of_work: ">=4"]
+    filters: [innovation_constant_improvement: ">=4"]
   }
-  measure: count_pride_ok {
+  measure: count_innovation_ok {
     type:  count
-    filters: [proud_of_work: "3"]
+    filters: [innovation_constant_improvement: "3"]
   }
-  measure: count_pride_not_good {
+  measure: count_innovation_not_good {
     type:  count
-    filters: [proud_of_work: "<=2"]
+    filters: [innovation_constant_improvement: "<=2"]
   }
 
   measure: count_work_load_too_much{
