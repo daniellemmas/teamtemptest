@@ -130,4 +130,8 @@ view: aginic_team_temp_data_v2 {
     type:  count
     filters: [work_load: "<=2"]
   }
+  measure: percent_respondents {
+    type: number
+    sql:  ${count_respondents}/${count_of_team} ;;
+  }
 }
