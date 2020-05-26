@@ -47,7 +47,7 @@ view: aginic_team_temp_data_v2 {
     sql: ${TABLE}.WorkLoad ;;
   }
   dimension: proud_of_work {
-    type: number
+    type: string
     sql: ${TABLE}.ProudOfWork ;;
   }
   dimension: squad_connection {
