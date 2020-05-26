@@ -16,6 +16,11 @@ view: aginic_team_temp_data_v2 {
     sql: ${TABLE}.DateSubmitted ;;
   }
 
+  dimension: week {
+    type: date_week
+    sql: ${TABLE}.DateSubmitted    ;;
+  }
+
   dimension: free_text_thoughts {
     type: string
     sql: ${TABLE}.FreeTextThoughts ;;
