@@ -18,7 +18,7 @@ view: aginic_team_temp_data_v2 {
 
   dimension: week {
     type: number
-    sql:  TIMESTAMP_TRUNC(${TABLE}.DateSubmitted, week) ;;
+    sql:  TIMESTAMP_TRUNC(PARSE_TIMESTAMP('yyyy-MM-dd HH:mm:ss',${TABLE}.DateSubmitted), week) ;;
   }
 
   dimension: free_text_thoughts {
