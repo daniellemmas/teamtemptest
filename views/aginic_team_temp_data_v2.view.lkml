@@ -59,6 +59,10 @@ view: aginic_team_temp_data_v2 {
     sql:  ${TABLE}.CountOfTeam ;;
   }
 
+  measure: sum_of_team {
+    type:  sum
+  }
+
   measure: count_respondents {
     type: count
     drill_fields: []
@@ -132,6 +136,6 @@ view: aginic_team_temp_data_v2 {
   }
   measure: percent_respondents {
     type: number
-    sql:  (${count_respondents})/(${count_of_team}) ;;
+    sql:  (${sum_of_team})/(${count_of_team}) ;;
   }
 }
