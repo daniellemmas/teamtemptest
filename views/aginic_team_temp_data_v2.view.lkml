@@ -61,6 +61,7 @@ view: aginic_team_temp_data_v2 {
 
   measure: sum_of_team {
     type:  sum
+    sql: ${count_of_team} ;;
   }
 
   measure: count_respondents {
