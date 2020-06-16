@@ -114,6 +114,18 @@ view: aginic_team_temp_data_v2 {
     type:  count
     filters: [squad_connection: "<=2"]
   }
+  measure: count_covid_yes {
+    type:  count
+    filters: [covid_impact: ">=4"]
+  }
+  measure: count_covid_somewhat {
+    type:  count
+    filters: [covid_impact: "3"]
+  }
+  measure: count_covid_no {
+    type:  count
+    filters: [covid_impact: "<=2"]
+  }
 
   measure: count_innovation_good {
     type:  count
