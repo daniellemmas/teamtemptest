@@ -47,6 +47,7 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: ${TABLE}.WeekScore ;;
   }
+
   dimension: work_load {
     type: number
     sql: ${TABLE}.WorkLoad ;;
@@ -55,10 +56,12 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: (${TABLE}.Innovation) ;;
   }
+
   dimension: squad_connection {
     type: number
     sql: ${TABLE}.SquadConnection ;;
   }
+
   dimension: count_of_team {
     type: number
     sql:  ${TABLE}.CountOfTeam ;;
@@ -73,60 +76,88 @@ view: aginic_team_temp_data_v2 {
     type: count
     drill_fields: []
   }
+
   measure: average {
     type: average
     sql:  ${week_score} ;;
     drill_fields: []
   }
+
   measure: count_not_good {
     type:  count
     filters: [week_score: "<= 2"]
   }
+
   measure: count_ok {
     type:  count
     filters: [week_score: "3"]
   }
+
   measure: count_good {
     type:  count
     filters: [week_score: ">= 4"]
   }
+
   measure: percentage_not_good {
     type: number
     sql:  (${count_not_good})/(${count_respondents}) ;;
   }
+
   measure: percentage_ok {
     type: number
     sql:  (${count_ok})/(${count_respondents}) ;;
   }
+
   measure: percentage_good {
     type: number
     sql:  (${count_good})/(${count_respondents}) ;;
   }
+
   measure: count_connection_good {
     type:  count
     filters: [squad_connection: ">=4"]
   }
+
   measure: count_connection_ok {
     type:  count
     filters: [squad_connection: "3"]
   }
+
   measure: count_connection_not_good {
     type:  count
     filters: [squad_connection: "<=2"]
   }
+
   measure: count_covid_yes {
     type:  count
     filters: [covid_impact: ">=4"]
   }
+
   measure: count_covid_somewhat {
     type:  count
     filters: [covid_impact: "3"]
   }
+
   measure: count_covid_no {
     type:  count
     filters: [covid_impact: "<=2"]
   }
 
+
+  measure: percentage_covid_no {
+    type: number
+    sql:  (${count_covid_no})/(${count_respondents}) ;;
+  }
+
+  measure: percentage_covid_somewhat {
+    type: number
+    sql:  (${count_covid_somewhat})/(${count_respondents}) ;;
+  }
+
+  measure: percentage_covid_yes {
+    type: number
+    sql:  (${count_covid_yes})/(${count_respondents}) ;;
+    }
   measure: count_innovation_good {
     type:  count
     filters: [innovation_constant_improvement: ">=4"]
