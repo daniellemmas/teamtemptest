@@ -27,6 +27,11 @@ view: aginic_team_temp_data_v2 {
     sql: ${TABLE}.FreeTextThoughts ;;
   }
 
+  dimension: covid_impact {
+    type: number
+    sql: ${TABLE}.CovidImpact ;;
+  }
+
   dimension: session_token {
     type: string
     primary_key: yes
