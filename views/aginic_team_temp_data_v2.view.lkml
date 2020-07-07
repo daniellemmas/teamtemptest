@@ -195,16 +195,16 @@ view: aginic_team_temp_data_v2 {
 
   measure: percent_respondents_good {
     type: number
-    sql:  (${count_good})/(${sum_of_team}/${count_respondents}) ;;
+    sql:  (${count_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
   }
 
   measure: percent_respondents_ok {
     type: number
-    sql:  (${count_ok})/(${sum_of_team}/${count_respondents}) ;;
+    sql:  (${count_ok})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
   }
 
   measure: percent_respondents_not_good {
     type: number
-    sql:  (${count_not_good})/(${sum_of_team}/${count_respondents}) ;;
+    sql:  (${count_not_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
   }
 }
