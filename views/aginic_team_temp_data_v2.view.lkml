@@ -205,6 +205,6 @@ view: aginic_team_temp_data_v2 {
 
   measure: percent_respondents_not_good {
     type: number
-    sql:  (${count_not_good}good})/(${sum_of_team}/${count_respondents}) ;;
+    sql:  (${count_not_good})/(${sum_of_team}/${count_respondents}) ;;
   }
 }
