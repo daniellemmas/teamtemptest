@@ -40,12 +40,10 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql: ${TABLE}.WeekScore ;;
   }
-
-  dimension: squad_connection {
-    type: number
-    sql: ${TABLE}.SquadConnection ;;
+  dimension: valued {
+    type: string
+    sql:  ${TABLE}.Valued ;;
   }
-
   dimension: count_of_team {
     type: number
     sql:  ${TABLE}.CountOfTeam ;;
@@ -56,9 +54,9 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql:  ${TABLE}.Interest ;;
   }
-  dimension: valued {
-    type: string
-    sql:  ${TABLE}.Valued ;;
+  dimension: squad_connection {
+    type: number
+    sql: ${TABLE}.SquadConnection ;;
   }
   dimension: work_load {
     type: number
@@ -160,7 +158,7 @@ view: aginic_team_temp_data_v2 {
   }
 
 
-# SQUAD CONNECTION (Core):
+# SQUAD CONNECTION (Option 3):
   measure: count_connection_good {
     type:  count
     filters: [squad_connection: ">=4"]
@@ -176,16 +174,16 @@ view: aginic_team_temp_data_v2 {
     filters: [squad_connection: "<=2"]
   }
 
-# WORKLOAD (Option 3):
-  measure: count_work_load_too_much{
+# WORKLOAD negatively affecting you (Option 3):
+  measure: count_work_load_negatively_affecting{
     type:  count
     filters: [work_load: ">=4"]
   }
-  measure: count_work_load_perfect {
+  measure: count_work_load_somewhat_affecting {
     type:  count
     filters: [work_load: "3"]
   }
-  measure: count_work_load_not_enough{
+  measure: count_work_load_fine{
     type:  count
     filters: [work_load: "<=2"]
   }
