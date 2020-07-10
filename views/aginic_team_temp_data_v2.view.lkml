@@ -217,6 +217,7 @@ view: aginic_team_temp_data_v2 {
 
 # ARCHIVE MEASURES ----------------------------------------
 
+# COVID related questions
 measure: count_covid_yes {
   type:  count
   filters: [covid_impact: ">=4"]
@@ -245,6 +246,8 @@ measure: percentage_covid_yes {
   type: number
   sql:  (${count_covid_yes})/(${count_respondents}) ;;
 }
+
+# Innovation and constant improvement questions
 measure: count_innovation_good {
   type:  count
   filters: [innovation_constant_improvement: ">=4"]
