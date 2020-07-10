@@ -21,17 +21,10 @@ view: aginic_team_temp_data_v2 {
     sql:  PARSE_TIMESTAMP('%F',CAST(${TABLE}.DateSubmitted AS STRING)) ;;
   }
 
-
   dimension: free_text_thoughts {
     type: string
     sql: ${TABLE}.FreeTextThoughts ;;
   }
-
-  dimension: covid_impact {
-    type: number
-    sql: ${TABLE}.CovidImpact ;;
-  }
-
   dimension: session_token {
     type: string
     primary_key: yes
@@ -48,15 +41,6 @@ view: aginic_team_temp_data_v2 {
     sql: ${TABLE}.WeekScore ;;
   }
 
-  dimension: work_load {
-    type: number
-    sql: ${TABLE}.WorkLoad ;;
-  }
-  dimension: innovation_constant_improvement {
-    type: number
-    sql: (${TABLE}.Innovation) ;;
-  }
-
   dimension: squad_connection {
     type: number
     sql: ${TABLE}.SquadConnection ;;
@@ -67,22 +51,55 @@ view: aginic_team_temp_data_v2 {
     sql:  ${TABLE}.CountOfTeam ;;
   }
 
+# Option 3 dimensions
+  dimension: interest {
+    type: number
+    sql:  ${TABLE}.Interest ;;
+  }
+  dimension: valued {
+    type: string
+    sql:  ${TABLE}.Valued ;;
+  }
+  dimension: work_load {
+    type: number
+    sql: ${TABLE}.WorkLoad ;;
+  }
+
+
+# ARCHIVE dimensions ---------------------------------
+  dimension: innovation_constant_improvement {
+    type: number
+    sql: (${TABLE}.Innovation) ;;
+  }
+  dimension: covid_impact {
+    type: number
+    sql: ${TABLE}.CovidImpact ;;
+  }
+
+
+
+# MEASURES -------------------------------------------
+
+# Total number of Aginic team
   measure: sum_of_team {
     type:  sum_distinct
     sql: ${count_of_team} ;;
   }
 
+# Total number of respondents
   measure: count_respondents {
     type: count
     drill_fields: []
   }
 
+# Average of week score
   measure: average {
     type: average
     sql:  ${week_score} ;;
     drill_fields: []
   }
 
+# Number of team that have responded good, ok or not good
   measure: count_not_good {
     type:  count
     filters: [week_score: "<= 2"]
@@ -98,21 +115,52 @@ view: aginic_team_temp_data_v2 {
     filters: [week_score: ">= 4"]
   }
 
+
+# Percentage of the respondents that have responded good, ok or not good
   measure: percentage_not_good {
     type: number
     sql:  (${count_not_good})/(${count_respondents}) ;;
   }
-
   measure: percentage_ok {
     type: number
     sql:  (${count_ok})/(${count_respondents}) ;;
   }
-
   measure: percentage_good {
     type: number
     sql:  (${count_good})/(${count_respondents}) ;;
   }
 
+
+# Percentage of whole team that are good, ok and not good (the number of people who didn't complete the survey is the left over %)
+  measure: percent_respondents_good {
+    type: number
+    sql:  (${count_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+  }
+  measure: percent_respondents_ok {
+    type: number
+    sql:  (${count_ok})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+  }
+
+  measure: percent_respondents_not_good {
+    type: number
+    sql:  (${count_not_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+  }
+
+
+# Percentage of each squad that completed the survey
+  measure: percent_respondents {
+    type: number
+    sql:  (${count_respondents})/(${sum_of_team}/${count_respondents}) ;;
+  }
+
+# Percentage of company that completed the survey
+  measure: total_percent_respondents {
+    type: number
+    sql:  sum(${aginic_team_temp_data_v2.count_respondents})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+  }
+
+
+# SQUAD CONNECTION (Core):
   measure: count_connection_good {
     type:  count
     filters: [squad_connection: ">=4"]
@@ -128,49 +176,7 @@ view: aginic_team_temp_data_v2 {
     filters: [squad_connection: "<=2"]
   }
 
-  measure: count_covid_yes {
-    type:  count
-    filters: [covid_impact: ">=4"]
-  }
-
-  measure: count_covid_somewhat {
-    type:  count
-    filters: [covid_impact: "3"]
-  }
-
-  measure: count_covid_no {
-    type:  count
-    filters: [covid_impact: "<=2"]
-  }
-
-
-  measure: percentage_covid_no {
-    type: number
-    sql:  (${count_covid_no})/(${count_respondents}) ;;
-  }
-
-  measure: percentage_covid_somewhat {
-    type: number
-    sql:  (${count_covid_somewhat})/(${count_respondents}) ;;
-  }
-
-  measure: percentage_covid_yes {
-    type: number
-    sql:  (${count_covid_yes})/(${count_respondents}) ;;
-    }
-  measure: count_innovation_good {
-    type:  count
-    filters: [innovation_constant_improvement: ">=4"]
-  }
-  measure: count_innovation_ok {
-    type:  count
-    filters: [innovation_constant_improvement: "3"]
-  }
-  measure: count_innovation_not_good {
-    type:  count
-    filters: [innovation_constant_improvement: "<=2"]
-  }
-
+# WORKLOAD (Option 3):
   measure: count_work_load_too_much{
     type:  count
     filters: [work_load: ">=4"]
@@ -183,28 +189,73 @@ view: aginic_team_temp_data_v2 {
     type:  count
     filters: [work_load: "<=2"]
   }
-  measure: percent_respondents {
-    type: number
-    sql:  (${count_respondents})/(${sum_of_team}/${count_respondents}) ;;
+
+# INTEREST (Option 3)
+  measure: count_interest_good{
+    type:  count
+    filters: [interest: ">=4"]
+  }
+  measure: count_interest_ok {
+    type:  count
+    filters: [interest: "3"]
+  }
+  measure: count_interest_not_good{
+    type:  count
+    filters: [interest: "<=2"]
   }
 
-  measure: total_percent_respondents {
-    type: number
-    sql:  sum(${aginic_team_temp_data_v2.count_respondents})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+# VALUED (Option 3)
+  measure: count_valued_yes{
+    type:  count
+    filters: [valued: "TRUE"]
+  }
+  measure: count_valued_no {
+    type:  count
+    filters: [valued: "FALSE"]
   }
 
-  measure: percent_respondents_good {
-    type: number
-    sql:  (${count_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
-  }
 
-  measure: percent_respondents_ok {
-    type: number
-    sql:  (${count_ok})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
-  }
+# ARCHIVE MEASURES ----------------------------------------
 
-  measure: percent_respondents_not_good {
-    type: number
-    sql:  (${count_not_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
-  }
+measure: count_covid_yes {
+  type:  count
+  filters: [covid_impact: ">=4"]
+}
+
+measure: count_covid_somewhat {
+  type:  count
+  filters: [covid_impact: "3"]
+}
+
+measure: count_covid_no {
+  type:  count
+  filters: [covid_impact: "<=2"]
+}
+measure: percentage_covid_no {
+  type: number
+  sql:  (${count_covid_no})/(${count_respondents}) ;;
+}
+
+measure: percentage_covid_somewhat {
+  type: number
+  sql:  (${count_covid_somewhat})/(${count_respondents}) ;;
+}
+
+measure: percentage_covid_yes {
+  type: number
+  sql:  (${count_covid_yes})/(${count_respondents}) ;;
+}
+measure: count_innovation_good {
+  type:  count
+  filters: [innovation_constant_improvement: ">=4"]
+}
+measure: count_innovation_ok {
+  type:  count
+  filters: [innovation_constant_improvement: "3"]
+}
+measure: count_innovation_not_good {
+  type:  count
+  filters: [innovation_constant_improvement: "<=2"]
+}
+
 }
