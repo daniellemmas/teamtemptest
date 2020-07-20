@@ -132,7 +132,7 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql:  {% if squad._in_query IS NOT NULL %}
           1
-          {% else state._in_query IS NULL %}
+          {% else squad._in_query IS NULL %}
           2
           {% endif %}
     ;;
