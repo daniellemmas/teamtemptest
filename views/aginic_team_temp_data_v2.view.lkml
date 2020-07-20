@@ -133,7 +133,7 @@ view: aginic_team_temp_data_v2 {
   measure: percent_respondents_good {
     type: number
     sql:  ( SELECT ${count_good}/sum(${count_of_team})
-            FROM aginic_team_temp_data_v2
+            FROM aginic-data-warehouse.reference.aginic_team_temp_data_v2
             GROUP BY ${squad}
             )
     ;;
