@@ -132,7 +132,10 @@ view: aginic_team_temp_data_v2 {
 # Percentage of whole team that are good, ok and not good (the number of people who didn't complete the survey is the left over %)
   measure: percent_respondents_good {
     type: number
-    sql:  (${count_good})/(SELECT sum(${count_of_team}) FROM aginic_team_temp_data_v2 GROUP BY ${squad})
+    sql:  ( SELECT ${count_good}/sum(${count_of_team})
+            FROM aginic_team_temp_data_v2
+            GROUP BY ${squad}
+            )
     ;;
   }
   measure: percent_respondents_ok {
