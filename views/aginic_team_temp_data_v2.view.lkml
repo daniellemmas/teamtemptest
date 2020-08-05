@@ -1,5 +1,5 @@
 view: aginic_team_temp_data_v2 {
-  sql_table_name: `aginic-data-warehouse.reference.aginic_team_temp_data_v2`
+  sql_table_name: `aginic-data-warehouse.reference.aginic_team_temp_data_v2_federated`
     ;;
 
   dimension_group: date_submitted {
@@ -137,6 +137,8 @@ view: aginic_team_temp_data_v2 {
           {% endif %}
     ;;
   }
+
+  #two options: attempt to the join and cross view calculation or end up with the above query
 
 # Percentage of whole team that are good, ok and not good (the number of people who didn't complete the survey is the left over %)
   measure: percent_respondents_good {
