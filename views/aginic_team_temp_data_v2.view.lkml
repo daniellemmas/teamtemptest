@@ -1,5 +1,5 @@
 view: aginic_team_temp_data_v2 {
-  sql_table_name: `aginic-data-warehouse.reference.aginic_team_temp_data_v2_federated`
+  sql_table_name: `aginic-data-warehouse.analytics.team_temp_combined`
     ;;
 
   dimension_group: date_submitted {
