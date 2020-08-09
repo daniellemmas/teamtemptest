@@ -46,7 +46,7 @@ view: aginic_team_temp_data_v2 {
   }
   dimension: count_of_team {
     type: number
-    sql:  ${TABLE}.count_of_team ;;
+    sql:  ${TABLE}.squad_member_count;;
   }
 
 # Option 3 dimensions
@@ -60,7 +60,7 @@ view: aginic_team_temp_data_v2 {
   }
   dimension: work_load {
     type: number
-    sql: ${TABLE}.work_load ;;
+    sql: ${TABLE}.workload ;;
   }
 
 
