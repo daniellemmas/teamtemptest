@@ -38,7 +38,7 @@ view: aginic_team_temp_data_v2 {
 
   dimension: week_score {
     type: number
-    sql: ${TABLE}.week_score ;;
+    sql: ${TABLE}.score ;;
   }
   dimension: valued {
     type: string
