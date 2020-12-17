@@ -1,5 +1,5 @@
 view: aginic_team_temp_data_v2 {
-  sql_table_name: `aginic-data-warehouse.reference.aginic_team_temp_data_v2`
+  sql_table_name: `aginic-data-warehouse.analytics.team_temp_responses`
     ;;
 
   dimension_group: date_submitted {
@@ -13,56 +13,61 @@ view: aginic_team_temp_data_v2 {
       year,
       time
     ]
-    sql: ${TABLE}.DateSubmitted ;;
+    sql: ${TABLE}.date_submitted ;;
   }
 
   dimension: week {
     type: date_week
-    sql:  PARSE_TIMESTAMP('%F',CAST(${TABLE}.DateSubmitted AS STRING)) ;;
+    sql:  PARSE_TIMESTAMP('%F',CAST(${TABLE}.date_submitted AS STRING)) ;;
   }
 
   dimension: free_text_thoughts {
     type: string
-    sql: ${TABLE}.FreeTextThoughts ;;
+    sql: ${TABLE}.free_text_thoughts ;;
   }
   dimension: session_token {
     type: string
     primary_key: yes
-    sql: ${TABLE}.SessionToken ;;
+    sql: ${TABLE}.session_token ;;
   }
 
   dimension: squad {
     type: string
-    sql: ${TABLE}.Squad ;;
+    sql: ${TABLE}.squad ;;
   }
 
   dimension: week_score {
     type: number
-    sql: ${TABLE}.WeekScore ;;
+    sql: ${TABLE}.score ;;
   }
 
   dimension: squad_connection {
     type: number
-    sql: ${TABLE}.SquadConnection ;;
+    sql: ${TABLE}.squad_connection ;;
+  }
+
+  dimension: tough_issues {
+    type: number
+    sql:  ${TABLE}.tough_issues ;;
   }
 
   dimension: count_of_team {
     type: number
-    sql:  ${TABLE}.CountOfTeam ;;
+    sql:  ${TABLE}.squad_member_count ;;
   }
 
 # Option 3 dimensions
   dimension: interest {
     type: number
-    sql:  ${TABLE}.Interest ;;
+    sql:  ${TABLE}.interest ;;
   }
   dimension: valued {
     type: string
-    sql:  ${TABLE}.Valued ;;
+    sql:  ${TABLE}.valued ;;
   }
   dimension: work_load {
     type: number
-    sql: ${TABLE}.WorkLoad ;;
+    sql: ${TABLE}.workload ;;
   }
 
 
