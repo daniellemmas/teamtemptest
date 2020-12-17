@@ -51,6 +51,11 @@ view: aginic_team_temp_data_v2 {
     sql:  ${TABLE}.tough_issues ;;
   }
 
+  dimension: valued {
+    type: string
+    sql:  ${TABLE}.valued ;;
+  }
+
   dimension: count_of_team {
     type: number
     sql:  ${TABLE}.squad_member_count ;;
@@ -61,10 +66,7 @@ view: aginic_team_temp_data_v2 {
     type: number
     sql:  ${TABLE}.interest ;;
   }
-  dimension: valued {
-    type: string
-    sql:  ${TABLE}.valued ;;
-  }
+
   dimension: work_load {
     type: number
     sql: ${TABLE}.workload ;;
@@ -74,11 +76,11 @@ view: aginic_team_temp_data_v2 {
 # ARCHIVE dimensions ---------------------------------
   dimension: innovation_constant_improvement {
     type: number
-    sql: (${TABLE}.Innovation) ;;
+    sql: (${TABLE}.innovation) ;;
   }
   dimension: covid_impact {
     type: number
-    sql: ${TABLE}.CovidImpact ;;
+    sql: ${TABLE}.covid_impact ;;
   }
 
 
@@ -135,20 +137,35 @@ view: aginic_team_temp_data_v2 {
     sql:  (${count_good})/(${count_respondents}) ;;
   }
 
+  measure: TEST {
+    type: number
+    sql:  {% if squad._in_query IS NOT NULL %}
+          1
+          {% else squad._in_query IS NULL %}
+          2
+          {% endif %}
+    ;;
+  }
+
+  #two options: attempt to the join and cross view calculation or end up with the above query
 
 # Percentage of whole team that are good, ok and not good (the number of people who didn't complete the survey is the left over %)
   measure: percent_respondents_good {
     type: number
-    sql:  (${count_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+    sql:  ( SELECT sum${count_good}/sum(${count_of_team})
+            FROM aginic-data-warehouse.reference.aginic_team_temp_data_v2
+            GROUP BY ${squad}
+            )
+    ;;
   }
   measure: percent_respondents_ok {
     type: number
-    sql:  (${count_ok})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+    sql:  (${count_ok})/sum(distinct ${aginic_team_temp_data_v2.count_of_team}) ;;
   }
 
   measure: percent_respondents_not_good {
     type: number
-    sql:  (${count_not_good})/sum(${aginic_team_temp_data_v2.count_of_team}) ;;
+    sql:  (${count_not_good})/sum(distinct ${aginic_team_temp_data_v2.count_of_team}) ;;
   }
 
 
@@ -165,7 +182,7 @@ view: aginic_team_temp_data_v2 {
   }
 
 
-# SQUAD CONNECTION (Core):
+# SQUAD CONNECTION (Option 3):
   measure: count_connection_good {
     type:  count
     filters: [squad_connection: ">=4"]
@@ -181,16 +198,16 @@ view: aginic_team_temp_data_v2 {
     filters: [squad_connection: "<=2"]
   }
 
-# WORKLOAD (Option 3):
-  measure: count_work_load_too_much{
+# WORKLOAD negatively affecting you (Option 3):
+  measure: count_work_load_negatively_affecting{
     type:  count
     filters: [work_load: ">=4"]
   }
-  measure: count_work_load_perfect {
+  measure: count_work_load_somewhat_affecting {
     type:  count
     filters: [work_load: "3"]
   }
-  measure: count_work_load_not_enough{
+  measure: count_work_load_fine{
     type:  count
     filters: [work_load: "<=2"]
   }
